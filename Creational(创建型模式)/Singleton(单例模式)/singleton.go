@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 var lock = &sync.Mutex{}
@@ -27,17 +26,4 @@ func NewSingletonInstance() *singleton {
 		fmt.Println("singleton instance already exists")
 	}
 	return singletonInstance
-}
-
-func init() {
-	fmt.Println("init start")
-	NewSingletonInstance()
-	fmt.Println("init end")
-}
-
-func main() {
-	for i := 0; i < 10; i++ {
-		go NewSingletonInstance()
-	}
-	time.Sleep(time.Second * 1)
 }

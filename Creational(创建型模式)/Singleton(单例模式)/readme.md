@@ -5,7 +5,6 @@
 ### output
 
 ```
-go run singleton.go                                                 (main|…2)
 init start
 create singleton instance
 init end
