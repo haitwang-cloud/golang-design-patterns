@@ -5,10 +5,11 @@ import (
 	"sync"
 )
 
-var lock = &sync.Mutex{}
-
 type singleton struct {
 }
+
+/*
+var lock = &sync.Mutex{}
 
 var singletonInstance *singleton
 
@@ -26,4 +27,23 @@ func NewSingletonInstance() *singleton {
 		fmt.Println("singleton instance already exists")
 	}
 	return singletonInstance
+}
+*/
+
+var once sync.Once
+
+var singleInstance *singleton
+
+func NewSingletonInstance() *singleton {
+	if singleInstance == nil {
+		once.Do(
+			func() {
+				fmt.Println("Creating single instance now in Once.")
+				singleInstance = &singleton{}
+			})
+	} else {
+		fmt.Println("Single instance already created.")
+	}
+
+	return singleInstance
 }
